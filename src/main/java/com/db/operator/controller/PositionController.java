@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/positions")
+@CrossOrigin
 public class PositionController {
     private final PositionCrudService service;
     public PositionController(PositionCrudService service) { this.service = service; }

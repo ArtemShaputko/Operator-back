@@ -36,6 +36,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Просмотр и CRUD по основным таблицам — без логина
                         .requestMatchers("/api/contracts/**",
                                 "/api/clients/**",
@@ -43,25 +44,37 @@ public class SecurityConfig {
                                 "/api/employees/**",
                                 "/api/support-tickets/**",
                                 "/api/contract-services/**").permitAll()
-
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/api/tariff-plans/**",
+                                "/api/services/**",
+                                "/api/positions/**",
+                                "/api/backup/**").hasRole("SUPERUSER")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/api/tariff-plans/**",
+                                "/api/services/**",
+                                "/api/positions/**",
+                                "/api/backup/**").hasRole("SUPERUSER")
+                        .requestMatchers(HttpMethod.POST,
+                                "/api/tariff-plans/**",
+                                "/api/services/**",
+                                "/api/positions/**",
+                                "/api/backup/**").hasRole("SUPERUSER")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/backup/**").permitAll()
                         // Просмотр справочников — без логина
                         .requestMatchers(HttpMethod.GET,
                                 "/api/tariff-plans/**",
                                 "/api/services/**",
-                                "/api/positions/**").permitAll()
-
-                        // Редактирование справочников и бэкап — только SUPERUSER
-                        .requestMatchers("/api/tariff-plans/**",
-                                "/api/services/**",
                                 "/api/positions/**",
-                                "/api/backup/**").hasRole("SUPERUSER")
-
+                                "/api/query/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/query/**").permitAll()
                         // Остальное — запрещено
                         .anyRequest().denyAll()
                 )
-                .httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults())
+                .cors(Customizer.withDefaults());
 
-        return http.build();
+        return http.build();    
     }
 }
 

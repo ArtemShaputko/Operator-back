@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/backup")
+@CrossOrigin
 public class BackupController {
 
     private final BackupService backupService;
@@ -20,6 +21,7 @@ public class BackupController {
     @PostMapping
     public ResponseEntity<String> createBackup() {
         try {
+            System.out.println("Creating backup");
             String fileName = backupService.backupDatabase();
             return ResponseEntity.ok("Бэкап создан: " + fileName);
         } catch (Exception e) {

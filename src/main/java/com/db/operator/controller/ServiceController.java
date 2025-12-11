@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/services")
+@CrossOrigin
 public class ServiceController {
     private final ServiceCrudService service;
     public ServiceController(ServiceCrudService service) { this.service = service; }

@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/contract-services")
+@CrossOrigin
 public class ContractServiceController {
     private final ContractServiceCrudService service;
 

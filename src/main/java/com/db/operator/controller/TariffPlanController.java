@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tariff-plans")
+@CrossOrigin
 public class TariffPlanController {
     private final TariffPlanCrudService service;
     public TariffPlanController(TariffPlanCrudService service) { this.service = service; }

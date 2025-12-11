@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bills")
+@CrossOrigin
 public class BillController {
     private final BillCrudService service;
 
